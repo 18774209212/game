@@ -61,29 +61,31 @@
 <script>
 import CutDown from '@/components/cutDown'
 import { format } from 'util'
-import {gamecatch} from '@/api/gameapi'
+import axios from  'axios'
 export default {    
     name:'Start',
     components:{
         CutDown
     },
     data() {
-        return{}
+        return{
+            // http:HttpService.getAxios
+        }
     },
     methods:{
         toCatchApple(){
             let type="apple";
-            gamecatch(type).then(res=>{
-                if(res.status==200){
-                    //进入抓取页面
-                    this.$router.push({path:'/play',query:{type:type}})
-                }
-            }).catch(res=>{
-                if(res.status==200){
-                    //进入抓取页面
+            axios.post('/gameApi/api/start',{type:type}).then(res=>{
+                if(res.data.status==200){
                     this.$router.push({path:'/play',query:{type:type}})
                 }
             })
+        //    axios.get('/gameApi/api/result').then(res=>{
+        //         console.log(res);
+        //     })
+            // this.http.get('/gameApi/api/result').then(res=>{
+            //     console.log(res);
+            // })
         },
         toCatchOrange(){
             let type="orange";
@@ -105,6 +107,7 @@ export default {
     height: 100%;
     background-image: url('../../static/imgs/bg2.png');
     background-size: 100% 100%;
+    overflow:hidden;
     background-repeat: no-repeat;
     .cutDown{
         padding: 1rem 0;
@@ -124,11 +127,23 @@ export default {
     }
     .content{
         .score{
-            margin-top: 0.3rem;
-            // img{
-            //     width:3.5rem;
-            //     height: 2.5rem;
-            // }
+            margin-top: 0.2rem;
+            img{
+                width:3.5rem;
+                height: 1.5rem;
+            }
+        }
+        .fruit{
+            img{
+                width:5rem;
+                height: 3rem;
+            }
+        }
+        .fruit-btn{
+            img{
+                width: 3.5rem;
+                height: 1.5rem;
+            }
         }
         .back{
             img{

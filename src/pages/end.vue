@@ -2,15 +2,12 @@
   <div class="page">
       <div class="rank">
           <p class="first">
-              <span>小明</span>
               <span>290</span>
           </p>
           <p class="second">
-              <span>小明</span>
               <span>290</span>
           </p>
           <p class="third">
-              <span>小明</span>
               <span>290</span>
           </p>
       </div>
@@ -31,6 +28,7 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position:relative;
+    overflow:hidden;
     .rank{
         position:absolute;
         top:29%;

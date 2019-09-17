@@ -1,6 +1,5 @@
-// import mallRequest from '@/utils/mallRequest.js'
-import axios from 'axios'
-import router from '../router'
+import mallRequest from '@/utils/mallRequest.js'
+
 // 抓取
 export function gamecatch(type) {
   return mallRequest({
@@ -11,6 +10,7 @@ export function gamecatch(type) {
     }
   })
 }
+// 获取状态
 export function getState(){
   return mallRequest({
     url:'/gameApi/api/result',

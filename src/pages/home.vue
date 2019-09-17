@@ -45,6 +45,7 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
+    overflow:hidden;
     .content{
         .start-btn{
             position:absolute;

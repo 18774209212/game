@@ -6,7 +6,7 @@
 export default {
   data() {
     return {
-       minutes: 0, //分
+       minutes: 4, //分
        seconds: 59, //秒
     }
   } ,

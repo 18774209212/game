@@ -16,8 +16,9 @@
 </template>
 <script>
 import CutDown from '@/components/cutDown'
-import {gamecatch,getState} from '@/api/gameapi'
+import axios from  'axios'
 import { mapState, mapMutations } from "vuex";
+import { Message } from 'element-ui';
 export default {
     name:'Play',
     components:{
@@ -26,36 +27,35 @@ export default {
     data() {
         return{
             status:'',
-            score:0
+            gloabalScore:this.config.score
         }
     },
     mounted(){
         let type=this.$route.query.type;
-        setInterval(function(){
-            getState().then(res=>{
-                if(res.data.state==2){
+        const timer=setInterval(function(){
+           axios.get('/gameApi/api/result').then(res=>{
+                if(res.data.data.state==2){
                     if(type==="pepper"){
-                        this.score=3;
+                        this.gloabalScore+=3;
                     }else if(type==="apple"){
-                        this.score=2;
+                        this.gloabalScore+=2;
                     }else if(type==="orange"){
-                        this.score=1;
+                        this.gloabalScore+=1;
                     }
+                    Message({
+                        message: res.data.msg,
+                        type: 'success',
+                        duration: 3 * 1000
+                    });
                     //把分数加起来
-                    
+                    // console.log("gloabalScore",this.gloabalScore);
+                    // 跳转到start页面
+
+                    //销毁interval
+                    clearInterval(timer);
+                    this.$router.push({path:'/start'})
                 }
-            }).catch(res=>{
-                console.log(res);
-                if(res.data.state==2){
-                    if(type==="pepper"){
-                        this.score=3;
-                    }else if(type==="apple"){
-                        this.score=2;
-                    }else if(type==="orange"){
-                        this.score=1;
-                    }
-                    
-                }
+                
             })
         },1000)   
     },
@@ -64,7 +64,7 @@ export default {
     }),
     methods:mapMutations({
         add:'increment'
-    })
+    }),
 }
 </script>
 <style lang='less' scoped>
@@ -74,6 +74,7 @@ export default {
     background-image: url('../../static/imgs/bg2.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    overflow:hidden;
     .cutDown{
         padding: 1rem 0;
         .cutDown-btn{

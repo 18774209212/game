@@ -27,6 +27,7 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
+    overflow:hidden;
     .info{
         position: absolute;
         top: 33%;

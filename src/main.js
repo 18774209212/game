@@ -5,7 +5,9 @@ import App from './App'
 import store from './vuex/store'
 import router from './router'
 import Router from 'vue-router'
+import config from './vuex/config'
 
+Vue.prototype.config=config
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err)

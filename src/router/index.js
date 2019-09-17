@@ -25,5 +25,10 @@ export default new Router({
       name:'Info',
       component:resolve=>require(['@/pages/Info'],resolve)
     },
+    {
+      path:'/end',
+      name:'End',
+      component:resolve=>require(['@/pages/End'],resolve)
+    }
   ]
 })

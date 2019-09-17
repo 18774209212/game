@@ -6,7 +6,7 @@
 export default {
   data() {
     return {
-       minutes: 4, //分
+       minutes: 0, //分
        seconds: 59, //秒
     }
   } ,
@@ -15,10 +15,12 @@ export default {
     num(n) {
       // 倒计时结束重新刷新页面
       if (this.minutes === 0 && this.seconds === 2) {
-        this.$message.warning('支付倒计时结束!即将刷新页面!');
+        this.$message.warning('游戏即将结束');
       }
       if (this.minutes === 0 && this.seconds === 0) {
-        window.location.reload();
+        // window.location.reload();
+        // 跳转到游戏结束页面
+        this.$router.push({path:'/end'});
       }
       return n < 10 ? '0' + n : '' + n;
     },

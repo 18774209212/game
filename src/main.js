@@ -6,7 +6,7 @@ import store from './vuex/store'
 import router from './router'
 import Router from 'vue-router'
 import config from './vuex/config'
-
+//绑定到prototype上
 Vue.prototype.config=config
 const originalPush = Router.prototype.push
 Router.prototype.push = function push(location) {

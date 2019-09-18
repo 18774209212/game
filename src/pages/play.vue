@@ -17,8 +17,9 @@
 <script>
 import CutDown from '@/components/cutDown'
 import axios from  'axios'
-import { mapState, mapMutations } from "vuex";
+
 import { Message } from 'element-ui';
+import config from '@/vuex/config'
 export default {
     name:'Play',
     components:{
@@ -27,44 +28,40 @@ export default {
     data() {
         return{
             status:'',
-            gloabalScore:this.config.score
+            gloabalScore:config.score
         }
     },
     mounted(){
         let type=this.$route.query.type;
+        let score=0;
+        var that=this;
         const timer=setInterval(function(){
            axios.get('/gameApi/api/result').then(res=>{
                 if(res.data.data.state==2){
                     if(type==="pepper"){
-                        this.gloabalScore+=3;
+                       score=3;
                     }else if(type==="apple"){
-                        this.gloabalScore+=2;
+                       score=2;
                     }else if(type==="orange"){
-                        this.gloabalScore+=1;
+                        score=1;
                     }
-                    Message({
-                        message: res.data.msg,
-                        type: 'success',
-                        duration: 3 * 1000
-                    });
+                    // Message({
+                    //     message: res.data.msg,
+                    //     type: 'success',
+                    //     duration: 3 * 1000
+                    // });
                     //把分数加起来
-                    // console.log("gloabalScore",this.gloabalScore);
-                    // 跳转到start页面
-
+                    let newScore=config.score+score;
+                    config.setScore(newScore);
                     //销毁interval
                     clearInterval(timer);
-                    this.$router.push({path:'/start'})
+                    console.log(this);
+                    // 跳转到start页面
+                    that.$router.push({name:"Start"})
                 }
-                
             })
         },1000)   
-    },
-    computed:mapState({
-        count: state => state.count,  //获取全局变量count的值
-    }),
-    methods:mapMutations({
-        add:'increment'
-    }),
+    }
 }
 </script>
 <style lang='less' scoped>
@@ -74,7 +71,7 @@ export default {
     background-image: url('../../static/imgs/bg2.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    overflow:hidden;
+    // overflow:hidden;
     .cutDown{
         padding: 1rem 0;
         .cutDown-btn{

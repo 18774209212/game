@@ -1,13 +1,20 @@
 <!--游戏说明-->
 <template>
     <div class="page">
-      <div class="info">
-          <p>游戏计时：1分钟</p>
-          <p>积分获取详情</p>
-          <p>辣椒：3分</p>
-          <p>苹果：2分</p>
-          <p>橙子：1分</p>
-      </div>
+        <div class="info">
+            <p>游戏计时：1分钟</p>
+            <p>积分获取详情</p>
+            <p>辣椒：3分</p>
+            <p>苹果：2分</p>
+            <p>橙子：1分</p>
+        </div>
+        <div class="back">
+            <el-row>
+                <el-col :offset="18" :span="6">
+                    <img src="../../static/imgs/back.jpg" @click="toBack()"/>
+                </el-col>
+            </el-row>
+        </div>
     </div>
 </template>
 <script>
@@ -16,7 +23,11 @@ export default {
     data() {
         return{}
     },
-    methods:{}
+    methods:{
+        toBack(){
+            this.$router.go(-1);
+        }
+    }
 }
 </script>
 <style lang='less' scoped>
@@ -27,18 +38,27 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    overflow:hidden;
+    // overflow:hidden;
     .info{
         position: absolute;
-        top: 33%;
-        left: 45%;
+        top: 30%;
+        left: 43%;
         p{
             padding: 0.2rem 0;
-            font-size: 0.45rem;
+            font-size: 50px;
             color: #ffffff;
-             text-shadow: -1px 0 rgb(61,38,12), 0 1px rgb(61,38,12),
-            1px 0 rgb(61,38,12), 0 -1px rgb(61,38,12);
+            text-shadow: -1px 0 6px rgb(61,38,12), 0 1px 6px rgb(61,38,12),
+            1px 0 6px rgb(61,38,12), 0 -1px 6px rgb(61,38,12);
             font-weight: bold;
+        }
+    }
+    .back{
+        position: absolute;
+        top: 68%;
+        left: 70%;
+        img{
+            width: 2rem;
+            height: 2rem;
         }
     }
 }

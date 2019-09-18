@@ -3,11 +3,12 @@
     <p>{{minute}}:{{second}}</p>
 </template>
 <script>
+import config from '@/vuex/config'
 export default {
   data() {
     return {
-       minutes: 4, //分
-       seconds: 59, //秒
+       minutes: config.minute, //分
+       seconds: config.second, //秒
     }
   } ,
   methods: {
@@ -31,11 +32,17 @@ export default {
         if (_this.seconds === 0 && _this.minutes !== 0) {
           _this.seconds = 59;
           _this.minutes -= 1;
+          config.setMinute(_this.minutes);
+          config.setSecond(_this.seconds);
         } else if (_this.minutes === 0 && _this.seconds === 0) {
           _this.seconds = 0;
+          config.setMinute(0);
+          config.setSecond(0);
           window.clearInterval(time);
         } else {
           _this.seconds -= 1;
+          config.setMinute(_this.minutes);
+          config.setSecond(_this.seconds);
         }
       }, 1000);
     },

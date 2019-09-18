@@ -45,27 +45,28 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: relative;
-    overflow:hidden;
+    // overflow:hidden;
     .content{
+        position:absolute;
+        top:54%;
+        left:43%;
         .start-btn{
-            position:absolute;
-            top: 54%;
-            left: 43%;
+            cursor: pointer;
             img{
                 width:5rem;
                 height:1.5rem;
             }
         }
         .info-btn{
-            position:absolute;
-            top: 65%;
-            left: 43%;
             cursor: pointer;
+
             p{
                 width:5rem;
                 height:1.5rem;
                 font-size:0.45rem;
                 text-align:convert;
+                text-shadow:4px 5px 6px #ffffff;
+                margin:0 auto;
             }
         }
     }

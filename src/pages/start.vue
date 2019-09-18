@@ -1,7 +1,6 @@
 <!--游戏开始-->
 <template>
     <div class="page">
-      <!-- <img src="../../static/imgs/bg2.png"/> -->
       <!-- 倒计时 -->
       <div  class="cutDown">
           <div class="cutDown-btn">
@@ -69,7 +68,6 @@ export default {
     },
     data() {
         return{
-            // http:HttpService.getAxios
         }
     },
     methods:{
@@ -80,23 +78,25 @@ export default {
                     this.$router.push({path:'/play',query:{type:type}})
                 }
             })
-        //    axios.get('/gameApi/api/result').then(res=>{
-        //         console.log(res);
-        //     })
-            // this.http.get('/gameApi/api/result').then(res=>{
-            //     console.log(res);
-            // })
         },
         toCatchOrange(){
             let type="orange";
-            this.$router.push({path:'/play',query:{type:type}})
+            axios.post('/gameApi/api/start',{type:type}).then(res=>{
+                if(res.data.status==200){
+                    this.$router.push({path:'/play',query:{type:type}})
+                }
+            })
         },
         toCatchPepper(){
             let type="pepper";
-            this.$router.push({path:'/play',query:{type:type}})
+            axios.post('/gameApi/api/start',{type:type}).then(res=>{
+                if(res.data.status==200){
+                    this.$router.push({path:'/play',query:{type:type}})
+                }
+            })
         },
         toBack(){
-            this.$router.go(-1);
+            this.$router.push({name:''})
         }
     }
 }
@@ -106,9 +106,10 @@ export default {
     width:100%;
     height: 100%;
     background-image: url('../../static/imgs/bg2.png');
-    background-size: 100% 100%;
-    overflow:hidden;
-    background-repeat: no-repeat;
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    background-repeat: repeat;
+    // overflow:hidden;
     .cutDown{
         padding: 1rem 0;
         .cutDown-btn{
